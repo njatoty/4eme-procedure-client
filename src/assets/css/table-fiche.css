@@ -1,0 +1,33 @@
+.button-table{
+    color: aliceblue;
+    font-weight: bold;
+    width: 300px;
+
+}
+.telecharger{
+    background: seagreen;
+
+}
+.vider{
+    background: indianred;
+
+}
+
+.telecharger:hover{
+    background-color: rgb(37, 105, 66);
+    color: #fff;
+}
+
+.vider:hover{
+    background-color: rgb(139, 62, 62);
+    color: #fff;
+}
+
+
+ul  .nav-underline-border{
+    display: none !important;
+}
+
+.fichier{
+    background-color: aqua;
+}
