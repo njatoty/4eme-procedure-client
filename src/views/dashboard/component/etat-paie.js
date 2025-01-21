@@ -41,7 +41,7 @@ const EtatDePaie = () => {
     },
     {
       name: 'gss',
-      label: 'Remplacer le fichier GSS',
+      label: 'Charger le fichier GSS',
       required: true,
       download: false,
       onUpload: (files) => setUploadedFile('gss', files[0]),
