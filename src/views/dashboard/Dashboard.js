@@ -31,7 +31,7 @@ const MenuTabs = () => {
         <CTabs activeItemKey={activeKey} onClick={alert}>
           <CTabList variant="underline-border">
             <CTab itemKey="etat-paie" onClick={() => setActiveKey('etat-paie')}>Configuration - Etat de paie</CTab>
-            <CTab itemKey="irsa" onClick={() => setActiveKey('irsa')}>Calculation IRSA</CTab>
+            <CTab itemKey="irsa" onClick={() => setActiveKey('irsa')}>Calcul IRSA</CTab>
           </CTabList>
           <CTabContent>
             <CTabPanel className="p-3" itemKey="etat-paie">
