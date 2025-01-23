@@ -41,7 +41,7 @@ const EtatDePaie = () => {
     },
     {
       name: 'gss',
-      label: 'Remplacer le fichier GSS',
+      label: 'Importer le fichier GSS',
       required: true,
       download: false,
       onUpload: (files) => setUploadedFile('gss', files[0]),
@@ -49,7 +49,7 @@ const EtatDePaie = () => {
     },
     {
       name: 'majoration',
-      label: 'Charger le fichier Majoration',
+      label: 'Importer le fichier Majoration',
       required: true,
       download: false,
       onUpload: (files) => setUploadedFile('majoration', files[0]),
@@ -80,8 +80,7 @@ const EtatDePaie = () => {
     setLoading(true);
 
     // get option
-    const response = await FPOptionService.getOption();
-    const { formula } = response;
+    const options = await FPOptionService.getOption();
     // get file uploaded
     // gss: GSSFile, template: TemplateFile, etc...
     const filesUploaded = inputFiles.reduce((obj, input) => {
@@ -98,7 +97,7 @@ const EtatDePaie = () => {
       plafondCnaps,
       coutTransport,
       coutRepas,
-      formula
+      options
     };
 
     try {
@@ -249,7 +248,7 @@ const EtatDePaie = () => {
       </CRow>
 
       <CRow style={{ marginBlock: "1rem" }}>
-        <CCol sm={12}>
+        <CCol sm={6}>
           <CButton type='submit' color='primary' disabled={loading}>
             {loading ? 'Traitement en cours...' : 'Commencer le Traitement'}
           </CButton>

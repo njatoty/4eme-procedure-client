@@ -2,7 +2,7 @@
 const BD = "http://localhost:6969/"
 
 export const validateSheetName = (sheetName, existingSheets) => {
-  
+
   if (!sheetName.trim()) {
     return { isValid: false, message: 'Sheet name cannot be empty' };
   }
@@ -15,9 +15,9 @@ export const validateSheetName = (sheetName, existingSheets) => {
 };
 
 export const createNewSheet = async (sheetName, existingSheets) => {
-  
+
   try {
-    const response = await fetch(`${BD}template/sheet`, {
+    const response = await fetch(`${API_BASE_URL}/template/sheet`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -34,9 +34,9 @@ export const createNewSheet = async (sheetName, existingSheets) => {
   }
 };
 
-export const deleteSheet = async (sheetName) => {  
+export const deleteSheet = async (sheetName) => {
   try {
-    const response = await fetch(`${BD}template/removeSheet/${sheetName}`, {
+    const response = await fetch(`${API_BASE_URL}/template/removeSheet/${sheetName}`, {
       method: 'delete',
       headers: {
         'Content-Type': 'application/json'
@@ -57,10 +57,10 @@ export const deleteSheet = async (sheetName) => {
 };
 
 export const updateSheet = async (sheetName, columns) => {
-  
-  
+
+
   try {
-    const response = await fetch(`${BD}template/updateColumn`, {
+    const response = await fetch(`${API_BASE_URL}/template/updateColumn`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'

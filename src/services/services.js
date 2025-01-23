@@ -1,4 +1,4 @@
-const baseURL = 'http://localhost:6969';
+const baseURL = import.meta.env.VITE_SERVER_URL || 'http://localhost:6969';
 
 /**
  * Method do get file from server by file name

@@ -12,6 +12,7 @@ import {  validateSheetName,
   deleteSheet,
   updateSheet,
 } from '../../utils/sheetUtils';
+import { API_BASE_URL } from '../../../../../services/fp-option-service';
 
 export const GSSEditor = () => {
   const [gssColumns, setGSSColumns] = useState([]);
@@ -19,11 +20,11 @@ export const GSSEditor = () => {
   const { alert, showAlert, clearAlert } = useAlert();
 
   console.log("gsss === ",gssColumns);
-  
+
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
-        const response = await axios.get('http://localhost:6969/template/allColumns');
+        const response = await axios.get(`${API_BASE_URL}/template/allColumns`);
         setGSSColumns(response.data);
       } catch (error) {
         showAlert('danger', 'Failed to fetch initial data');
@@ -42,13 +43,13 @@ export const GSSEditor = () => {
     }
     const newColumns = await createNewSheet(newSheetName, gssColumns);
     const updatedColumns = [...gssColumns, newColumns];
-    
+
     setGSSColumns(updatedColumns);
 
     setNewSheetName('');
     showAlert('success', 'Sheet added successfully!');
   };
-  
+
   const fetchInitialData = async () => {
     try {
       const response = await axios.get('http://localhost:6969/template/allColumns');
@@ -76,18 +77,18 @@ export const GSSEditor = () => {
   return (
     <CContainer className="py-4">
       <h2 className="mb-4">GLOBAL SALARY SHEET</h2>
-      
+
       <Alert alert={alert} onClose={clearAlert} />
-      
+
 
       <SheetForm
         newSheetName={newSheetName}
         onNameChange={setNewSheetName}
         onAdd={handleAddSheet}
       />
-      
+
       {Object.entries(gssColumns).map(([sheetName, columns]) => (
-        
+
         <SheetEditor
           key={sheetName}
           sheetName={columns.sheetName}

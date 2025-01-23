@@ -10,6 +10,7 @@ import {
 } from '@coreui/react'
 import EtatDePaie from './component/etat-paie'
 import IRSADuForm from './component/irsa'
+import HeureTravailForm from './component/heures-travail'
 
 const MenuTabs = () => {
 
@@ -32,6 +33,7 @@ const MenuTabs = () => {
           <CTabList variant="underline-border">
             <CTab itemKey="etat-paie" onClick={() => setActiveKey('etat-paie')}>Configuration - Etat de paie</CTab>
             <CTab itemKey="irsa" onClick={() => setActiveKey('irsa')}>Calcul IRSA</CTab>
+            {/* <CTab itemKey="heure-travail" onClick={() => setActiveKey('heure-travail')}>Heures de travail</CTab> */}
           </CTabList>
           <CTabContent>
             <CTabPanel className="p-3" itemKey="etat-paie">
@@ -40,6 +42,9 @@ const MenuTabs = () => {
             <CTabPanel className="p-3" itemKey="irsa">
               <IRSADuForm />
             </CTabPanel>
+            {/* <CTabPanel className="p-3" itemKey="heure-travail">
+              <HeureTravailForm />
+            </CTabPanel> */}
           </CTabContent>
         </CTabs>
       </CCol>
