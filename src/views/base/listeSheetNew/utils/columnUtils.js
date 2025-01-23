@@ -1,3 +1,5 @@
+import { API_BASE_URL } from "../../../../services/fp-option-service";
+
 const BD = "http://localhost:6969/"
 
 export const addColumn = async (sheetName, columnName, columnValue, existingColumns) => {
@@ -5,9 +7,9 @@ export const addColumn = async (sheetName, columnName, columnValue, existingColu
   if (!columnName && !columnValue) {
     return existingColumns;
   }
-  
+
   try {
-    const response = await fetch(`${BD}template/addColumn`, {
+    const response = await fetch(`${API_BASE_URL}/template/addColumn`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -27,11 +29,11 @@ export const addColumn = async (sheetName, columnName, columnValue, existingColu
 };
 
 export const deleteColumn = async (columnName, sheetName) => {
-  
+
   console.log("newColumns", sheetName);
-  
+
   try {
-    const response = await fetch(`${BD}template/removeColumn`, {
+    const response = await fetch(`${API_BASE_URL}/template/removeColumn`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
