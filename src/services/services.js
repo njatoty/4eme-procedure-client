@@ -1,4 +1,4 @@
-const baseURL = import.meta.env.VITE_SERVER_URL || 'http://localhost:6969';
+const baseURL = import.meta.env.VITE_SERVER_URL || 'http://localhost:8080';
 
 /**
  * Method do get file from server by file name
@@ -50,10 +50,16 @@ export const uploadFileToServer = async(name, file) => {
 export const startProcessus = async (obj) => {
   try {
 
+    console.log("dd", obj);
+    
     const formData = new FormData();
-    Object.entries(obj).forEach((([k, v]) => {
-      formData.append(k, v);
-    }));
+    Object.entries(obj).forEach(([key, value]) => {
+      if (value) {
+        formData.append(key, value);
+      }
+    });
+
+    console.log("FormData:", [...formData.entries()]);
 
     const response = await fetch(`${baseURL}/fiche-paie/start-processus`, {
       method: 'POST',
@@ -72,6 +78,8 @@ export const startProcessus = async (obj) => {
     result.variable = obj
 
 
+    console.log("Processus started successfully:", result.data.slice(0, 5));
+    
     return result;
 
   } catch (error) {
@@ -97,9 +105,21 @@ export const copyDataToTheTemplate = async (data, variable) => {
       throw new Error("Failed to copy data!");
     }
 
-    const result = await response.blob(); // Assuming server returns JSON
+    // const result = await response.blob(); // Assuming server returns JSON
+    // console.log("resu", result);
+    
 
-    return result;
+    // return result;
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'Etat_De_Paie.xlsx';  // Nom du fichier à télécharger
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
 
   } catch (error) {
     console.error("Error while starting processus:", error);
@@ -122,3 +142,6 @@ export const downloadBlob = (blob, filename) => {
     a.remove();
     window.URL.revokeObjectURL(url);
 }
+
+
+

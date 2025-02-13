@@ -52,7 +52,7 @@ export const GSSEditor = () => {
 
   const fetchInitialData = async () => {
     try {
-      const response = await axios.get('http://localhost:6969/template/allColumns');
+      const response = await axios.get('http://localhost:8080/template/allColumns');
       setGSSColumns(response.data);
     } catch (error) {
       showAlert('danger', 'Failed to fetch initial data');

@@ -1,0 +1,107 @@
+#root {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .salary-manager {
+    padding: 20px;
+  }
+  
+  .add-employee-form {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .add-employee-form input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .add-employee-form button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .add-employee-form button:hover {
+    background-color: #45a049;
+  }
+  
+  .search-bar {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .search-bar input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 300px;
+    font-size: 16px;
+  }
+  
+  .salary-table-container {
+    overflow-x: auto;
+  }
+  
+  .salary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: white;
+  }
+  
+  .salary-table th,
+  .salary-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .salary-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .salary-table input {
+    width: 80px;
+    padding: 4px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+  }
+  
+  .salary-table .total {
+    font-weight: bold;
+    background-color: #f8f9fa;
+  }
+  
+  .delete-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .delete-btn:hover {
+    background-color: #c82333;
+  }
+  
+  @media (max-width: 1024px) {
+    .salary-table-container {
+      max-width: 100%;
+      overflow-x: scroll;
+    }
+  }

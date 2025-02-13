@@ -68,6 +68,7 @@ const EtatDePaie = () => {
     // TODO
     async function fetchFPOption() {
       const response = await FPOptionService.getOption();
+      
       if (response.plafondCNAPS) {
         setPlafondCnaps(response.plafondCNAPS);
       }
@@ -81,6 +82,7 @@ const EtatDePaie = () => {
 
     // get option
     const options = await FPOptionService.getOption();
+    
     // get file uploaded
     // gss: GSSFile, template: TemplateFile, etc...
     const filesUploaded = inputFiles.reduce((obj, input) => {
@@ -103,7 +105,7 @@ const EtatDePaie = () => {
     try {
       const response = await startProcessus({ ...data, ...filesUploaded});
 
-      console.log(response)
+      // console.log(response)
 
       // start copying data
       const blob = await copyDataToTheTemplate(response.data, response.variable);
@@ -125,7 +127,7 @@ const EtatDePaie = () => {
    */
   async function handleDownloadTemplate() {
     const blob = await getFileFromServer('template.xlsx');
-    downloadBlob(blob);
+    downloadBlob(blob, 'Template_Etat_de_Paie.xlsx');
   }
 
   return (
