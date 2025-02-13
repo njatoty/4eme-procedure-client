@@ -21,6 +21,7 @@ const Tabs = React.lazy(() => import('./views/base/tabs/Tabs'))
 const Tables = React.lazy(() => import('./views/base/tables/Tables'))
 const Sheet = React.lazy(() => import('./views/base/listeSheetNew/listes'))
 const Files = React.lazy(() => import('./views/base/files/file'))
+const Salaire = React.lazy(() => import('./views/base/salaire/Salaire'))
 
 // Buttons
 const Buttons = React.lazy(() => import('./views/buttons/buttons/Buttons'))
@@ -75,6 +76,7 @@ const routes = [
   { path: '/base/tables', name: 'Tables', element: Tables },
   { path: '/base/files', name: 'Files', element: Files },
   { path: '/base/template', name: 'Sheet', element: Sheet },
+  { path: '/base/salaire', name: 'Salaire', element: Salaire },
   { path: '/buttons', name: 'Buttons', element: Buttons, exact: true },
   { path: '/buttons/buttons', name: 'Buttons', element: Buttons },
   { path: '/buttons/dropdowns', name: 'Dropdowns', element: Dropdowns },

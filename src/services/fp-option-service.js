@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-export const API_BASE_URL = import.meta.env.VITE_SERVER_URL || 'http://localhost:6969'; // Adjust base URL as needed
+export const API_BASE_URL = import.meta.env.VITE_SERVER_URL || 'http://localhost:8080'; // Adjust base URL as needed
 const IRSA_API_URL = `${API_BASE_URL}/fp-option`;
 
 console.log(import.meta.env.VITE_SERVER_URL);
@@ -12,6 +12,7 @@ const IRSADuService = {
     getOption: async () => {
         try {
             const response = await axios.get(`${IRSA_API_URL}`);
+            
             return response.data;
         } catch (error) {
             if (axios.isAxiosError(error)) {
@@ -124,6 +125,7 @@ const IRSADuService = {
     getAgents: async () => {
       try {
           const response = await axios.get(`${IRSA_API_URL}/agents`);
+          
           return response.data;
       } catch (error) {
           if (axios.isAxiosError(error)) {
@@ -135,6 +137,7 @@ const IRSADuService = {
     },
 
     updateHeuresTravails: async (data) => {
+        
       try {
           const response = await axios.put(`${IRSA_API_URL}/heures-travails`, { ...data });
           return response.data;

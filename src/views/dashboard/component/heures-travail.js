@@ -23,7 +23,7 @@ function highlightSearch(text, searchTerm) {
 }
 
 const DroppableComponent = ({ droppableId, items, searchText, setItems }) => {
-
+  
   const dataItems = useMemo(() => filterItems(items, searchText), [items, searchText]);
 
   return (
@@ -41,8 +41,10 @@ const DroppableComponent = ({ droppableId, items, searchText, setItems }) => {
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                       ref={provided.innerRef}
-                      className={`draggable-item ${droppableId} p-2 d-inline-block me-2 mb-2 ${item.isNew ? 'new' : ''}`}
-                      dangerouslySetInnerHTML={{ __html: highlightSearch(item.m_code, searchText) }}
+                      className={`draggable-item ${droppableId} p-2 d-block me-2 mb-2 ${item.isNew ? 'new' : ''}`}
+                      dangerouslySetInnerHTML={{ __html: highlightSearch(
+                        `${item.m_code} *** ${item.usuel} `, searchText
+                      ) }}
                     />
                   )}
                 </Draggable>
@@ -102,12 +104,12 @@ const HeureTravailForm = () => {
       // fetch user pointage
       FPOptionService.getAgents().then(data => {
         // return setAgentsPointage(data);
-        setAgentsPointage([
-          { m_code: "M-NAT", user_ht: 8, id: "100" },
-          { m_code: "M-VAN", user_ht: 6, id: "101" },
-          { m_code: "M-CLA", user_ht: 6, id: "102" },
-          { m_code: "M-NA", user_ht: 8, id: "103" },
-        ]);
+        // setAgentsPointage([
+        //   { m_code: "M-NAT", user_ht: 8, id: "100" },
+        //   { m_code: "M-VAN", user_ht: 6, id: "101" },
+        //   { m_code: "M-CLA", user_ht: 6, id: "102" },
+        //   { m_code: "M-NA", user_ht: 8, id: "103" },
+        // ]);
       });
     } catch (err) {
       console.log(err)
@@ -123,10 +125,10 @@ const HeureTravailForm = () => {
   useEffect(() => {
 
     const combined = [...agentsFP, ...newAgents]
-    const sortByM_code = (a, b) => a.m_code.localeCompare(b.m_code);
-    setItems6H(combined.filter(agent => agent.user_ht === 6).sort(sortByM_code));
-    setItems8H(combined.filter(agent => agent.user_ht === 8).sort(sortByM_code));
-
+    // const sortByM_code = (a, b) => a.m_code.localeCompare(b.m_code);
+    setItems6H(combined.filter(agent => agent.user_ht === 6).sort());
+    setItems8H(combined.filter(agent => agent.user_ht === 8).sort());
+    
   }, [agentsFP, newAgents]);
 
   const handleDragEnd = (result) => {
