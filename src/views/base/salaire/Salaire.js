@@ -441,7 +441,7 @@ function App() {
                 {filteredColumns.map(({ month, year }, index) => (
                   <th key={index}>{month} {year}</th>
                 ))}
-                <th>Total Annuel</th>
+                <th>Moyenne Annuel</th>
                 <th>Actions</th>
               </tr>
             </thead>
