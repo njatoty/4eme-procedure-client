@@ -447,11 +447,18 @@ function App() {
             </thead>
             <tbody>
               {filteredEmployees.map(employee => {
-                let totalAnnuel = filteredColumns.reduce((total, { month, year }) => {
+                
+                let salaireValide = filteredColumns.map(({ month, year }) => {
                   let key = `${months.indexOf(month) + 1}-${year}`;
-                  return total + (employee.monthlySalaries[key] || 0);
-                }, 0).toLocaleString('fr-FR');
-  
+                  return employee.monthlySalaries[key] || 0;
+                }).filter(salaire => salaire > 0); // Filtrer les salaires valides
+                
+                let moyenne = salaireValide.length > 0 
+                  ? (salaireValide.reduce((total, salaire) => total + salaire, 0) / salaireValide.length).toFixed(2)
+                  : '0';
+                
+                moyenne = parseFloat(moyenne).toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
                 return (
                   <tr key={employee.employeeId._id}>
                     <td>{employee.employeeId.m_code}</td>
@@ -478,7 +485,7 @@ function App() {
                         </td>
                       );
                     })}
-                    <td className='total'>{totalAnnuel} AR</td>
+                    <td className='total'>{moyenne} AR</td>
   
                     <td>
                       <button
