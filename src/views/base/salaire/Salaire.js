@@ -89,10 +89,13 @@ function App() {
     const fetchData = async () => {
       try {
         const [employeeData, salaryData] = await Promise.all([getEmployees(), getSalaryEmployees()]);
+        console.log("employeeData", employeeData);
+        
         setEmployees(employeeData);
         setSalaryEmployees(salaryData);
       } catch (err) {
-        setError('Erreur lors du chargement des données');
+        console.log("err == ", err)
+        setError('Erreur lors du chargement des données', err);
       } finally {
         setLoading(false);
       }
@@ -162,20 +165,6 @@ function App() {
   // Fonction pour ajouter ou mettre à jour les salaires de plusieurs employés
   const updateMultipleSalaries = (prevSalaries, newSalaries) => {
     
-    // Boucle sur chaque nouvel élément (nouveau salaire)
-    // let newS = newSalaries.forEach(newSalary => {
-    //   const { employeeId, year, monthlySalaries } = newSalary;
-      
-    //   const existingIndex = prevSalaries.findIndex((sal) => sal.employeeId._id === employeeId._id && sal.year === year);
-
-    //   if (existingIndex !== -1) {
-    //     return prevSalaries.map((sal, index) =>
-    //       index === existingIndex ? { ...sal, monthlySalaries: { ...sal.monthlySalaries, ...monthlySalaries } } : sal
-    //     );
-    //   }
-  
-    //   return [...prevSalaries, newSalary];
-    // });
     let newS = newSalaries.reduce((acc, newSalary) => {
       const { employeeId, year, monthlySalaries } = newSalary;
     
