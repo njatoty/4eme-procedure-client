@@ -89,10 +89,13 @@ function App() {
     const fetchData = async () => {
       try {
         const [employeeData, salaryData] = await Promise.all([getEmployees(), getSalaryEmployees()]);
+        console.log("employeeData", employeeData);
+        
         setEmployees(employeeData);
         setSalaryEmployees(salaryData);
       } catch (err) {
-        setError('Erreur lors du chargement des données');
+        console.log("err == ", err)
+        setError('Erreur lors du chargement des données', err);
       } finally {
         setLoading(false);
       }
@@ -162,20 +165,6 @@ function App() {
   // Fonction pour ajouter ou mettre à jour les salaires de plusieurs employés
   const updateMultipleSalaries = (prevSalaries, newSalaries) => {
     
-    // Boucle sur chaque nouvel élément (nouveau salaire)
-    // let newS = newSalaries.forEach(newSalary => {
-    //   const { employeeId, year, monthlySalaries } = newSalary;
-      
-    //   const existingIndex = prevSalaries.findIndex((sal) => sal.employeeId._id === employeeId._id && sal.year === year);
-
-    //   if (existingIndex !== -1) {
-    //     return prevSalaries.map((sal, index) =>
-    //       index === existingIndex ? { ...sal, monthlySalaries: { ...sal.monthlySalaries, ...monthlySalaries } } : sal
-    //     );
-    //   }
-  
-    //   return [...prevSalaries, newSalary];
-    // });
     let newS = newSalaries.reduce((acc, newSalary) => {
       const { employeeId, year, monthlySalaries } = newSalary;
     
@@ -458,11 +447,18 @@ function App() {
             </thead>
             <tbody>
               {filteredEmployees.map(employee => {
-                let totalAnnuel = filteredColumns.reduce((total, { month, year }) => {
+                
+                let salaireValide = filteredColumns.map(({ month, year }) => {
                   let key = `${months.indexOf(month) + 1}-${year}`;
-                  return total + (employee.monthlySalaries[key] || 0);
-                }, 0).toLocaleString('fr-FR');
-  
+                  return employee.monthlySalaries[key] || 0;
+                }).filter(salaire => salaire > 0); // Filtrer les salaires valides
+                
+                let moyenne = salaireValide.length > 0 
+                  ? (salaireValide.reduce((total, salaire) => total + salaire, 0) / salaireValide.length).toFixed(2)
+                  : '0';
+                
+                moyenne = parseFloat(moyenne).toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
                 return (
                   <tr key={employee.employeeId._id}>
                     <td>{employee.employeeId.m_code}</td>
@@ -489,7 +485,7 @@ function App() {
                         </td>
                       );
                     })}
-                    <td className='total'>{totalAnnuel} AR</td>
+                    <td className='total'>{moyenne} AR</td>
   
                     <td>
                       <button
